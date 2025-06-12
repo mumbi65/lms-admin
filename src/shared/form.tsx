@@ -10,7 +10,6 @@ import {Form,FormField,FormItem,FormLabel,FormControl,FormMessage} from '@/compo
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import {Select,SelectContent,SelectItem,SelectTrigger,SelectValue,} from '@/components/ui/select';
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { Plus } from 'lucide-react';
 
 const courseFormSchema = z.object({
@@ -61,7 +60,7 @@ export function NewCourseDialog() {
             border-2 border-transparent hover:border-[#FE3448]
             flex items-center gap-2
           "
-          style={{ fontFamily: 'Inter, sans-serif' }}
+          style={{ fontFamily: 'Open Sans, sans-serif' }}
         >
           New Course
           <Plus className="w-4 h-4" />
@@ -226,7 +225,7 @@ export function NewCourseDialog() {
                       }} 
                       value=""
                     >
-                      <SelectTrigger className="select-trigger mt-1 h-11" data-focus-red style={{ fontFamily: 'Open Sans, sans-serif' }}>
+                      <SelectTrigger className="select-trigger mt-1 h-11 w-full" data-focus-red style={{ fontFamily: 'Open Sans, sans-serif' }}>
                         <SelectValue placeholder="Select all that apply" />
                       </SelectTrigger>
                       <SelectContent>
@@ -263,18 +262,18 @@ export function NewCourseDialog() {
               )}
             />
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="w-full grid grid-cols-2 gap-8">
               <FormField
                 control={form.control}
                 name="category"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="w-full">
                     <FormLabel className="text-sm font-medium text-gray-900" style={{ fontFamily: 'Inter, sans-serif' }}>
                       Course Category*
                     </FormLabel>
                     <FormControl>
                       <Select onValueChange={field.onChange} value={field.value}>
-                        <SelectTrigger className="select-trigger mt-1 h-11" data-focus-red style={{ fontFamily: 'Open Sans, sans-serif' }}>
+                        <SelectTrigger className="select-trigger mt-1 h-11  w-full" data-focus-red style={{ fontFamily: 'Open Sans, sans-serif' }}>
                           <SelectValue placeholder="Select Category" />
                         </SelectTrigger>
                         <SelectContent>
@@ -282,8 +281,8 @@ export function NewCourseDialog() {
                           <SelectItem value="Data Analysis">Data Analysis</SelectItem>
                           <SelectItem value="Web Development">Web Development</SelectItem>
                           <SelectItem value="Mobile Development">Mobile Development</SelectItem>
-                          <SelectItem value="Design">Design</SelectItem>
-                          <SelectItem value="Business">Business</SelectItem>
+                          <SelectItem value="DevOps">DevOps</SelectItem>
+                          <SelectItem value="Cloud Computing">Cloud Computing</SelectItem>
                         </SelectContent>
                       </Select>
                     </FormControl>
@@ -296,13 +295,13 @@ export function NewCourseDialog() {
                 control={form.control}
                 name="difficulty"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="w-full">
                     <FormLabel className="text-sm font-medium text-gray-900" style={{ fontFamily: 'Inter, sans-serif' }}>
                       Difficulty*
                     </FormLabel>
                     <FormControl>
                       <Select onValueChange={field.onChange} value={field.value}>
-                        <SelectTrigger className="select-trigger mt-1 h-11" data-focus-red style={{ fontFamily: 'Open Sans, sans-serif' }}>
+                        <SelectTrigger className="select-trigger mt-1 h-11 w-full" data-focus-red style={{ fontFamily: 'Open Sans, sans-serif' }}>
                           <SelectValue placeholder="Select Difficulty" />
                         </SelectTrigger>
                         <SelectContent>
@@ -328,7 +327,7 @@ export function NewCourseDialog() {
                   </FormLabel>
                   <FormControl>
                     <Select onValueChange={field.onChange} value={field.value}>
-                      <SelectTrigger className="select-trigger mt-1 h-11" data-focus-red style={{ fontFamily: 'Open Sans, sans-serif' }}>
+                      <SelectTrigger className="select-trigger mt-1 h-11 w-full" data-focus-red style={{ fontFamily: 'Open Sans, sans-serif' }}>
                         <SelectValue placeholder="Select Status" />
                       </SelectTrigger>
                       <SelectContent>
@@ -347,8 +346,8 @@ export function NewCourseDialog() {
                 <Button 
                   variant="outline" 
                   className="
-                    border-gray-300 text-gray-700 hover:bg-gray-50
-                    px-8 py-3 h-11 flex-1 max-w-[150px]
+                    border-[#0091AD] text-gray-700 hover:bg-[#0091AD] hover:text-white
+                    px-20 py-3 h-11
                   "
                   style={{ fontFamily: 'Inter, sans-serif' }}
                 >
@@ -361,7 +360,7 @@ export function NewCourseDialog() {
                   bg-[#FE3448] hover:bg-[#E02F3F] active:bg-[#D02A3A]
                   text-white font-medium
                   transition-all duration-200
-                  px-8 py-3 h-11 flex-1 max-w-[150px]
+                  px-15 py-3 h-11
                 "
                 style={{ fontFamily: 'Inter, sans-serif' }}
               >

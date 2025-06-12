@@ -22,7 +22,7 @@ export function Sidebar({ isExpanded }: SidebarProps) {
 
   return (
     <aside className={`
-      hidden md:flex flex-col bg-white shadow-sm border-r border-cream flex flex-col
+      hidden md:flex flex-col bg-white shadow-sm border-r border-[#D3D3D3] flex flex-col
       transition-all duration-300 ease-in-out
       ${isExpanded ? 'w-64' : 'w-16'}
     `}>

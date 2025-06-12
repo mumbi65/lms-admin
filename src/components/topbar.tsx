@@ -43,8 +43,8 @@ export function Topbar({ onToggleSidebar }: TopbarProps) {
 
         {/* Right group: help, notifications, profile */}
         <div className="flex items-center gap-4">
-          <HelpCircle className="w-6 h-6 text-gray-400 cursor-pointer hover:text-gray-600 transition" />
-          <Bell className="w-6 h-6 text-gray-400 cursor-pointer hover:text-gray-600 transition" />
+          <HelpCircle className="w-6 h-6 text-black cursor-pointer hover:text-[#0091AD] transition" />
+          <Bell className="w-6 h-6 text-black cursor-pointer hover:text-[#0091AD] transition" />
 
           {/* Profile dropdown */}
           <DropdownMenu>
@@ -55,7 +55,7 @@ export function Topbar({ onToggleSidebar }: TopbarProps) {
                   alt="User avatar"
                   className="w-8 h-8 rounded-full object-cover"
                 />
-                <span className="font-medium text-gray-900" style={{ fontFamily: 'Inter' }}>
+                <span className="font-medium text-gray-900 hover:text-[#0091AD]" style={{ fontFamily: 'Inter' }}>
                   John Doe
                 </span>
                 <ChevronDown className="w-4 h-4 text-gray-500" />
