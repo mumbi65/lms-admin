@@ -2,7 +2,7 @@
 
 A modern and intuitive admin dashboard for managing courses in a Learning Management System (LMS). Built with **React + TypeScript**, styled using **ShadCN UI**, and powered by clean, modular components.
 
-Designed to help admins manage courses efficiently — add, view, and organize content with ease.
+Designed to help admins manage courses efficiently, add, view, and organize content with ease.
 
 ---
 
