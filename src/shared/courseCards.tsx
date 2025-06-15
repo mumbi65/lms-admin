@@ -10,7 +10,7 @@ interface CourseCardProps {
 
 export function CourseCard({ course }: CourseCardProps) {
   return (
-    <Card className="border-border rounded-2xl overflow-hidden">
+    <Card className="border-border-gray rounded-lg overflow-hidden">
       <div className="h-40 w-full overflow-hidden">
         <img
           src={course.image}
@@ -20,31 +20,19 @@ export function CourseCard({ course }: CourseCardProps) {
         />
       </div>
       <CardContent className="space-y-2">
-        <h3 
-          className="text-l text-black font-semibold"
-          style={{ fontFamily: "'Inter', 'sans-serif'" }}
-        >
+        <h3 className="text-l text-black font-semibold font-heading">
           {course.title}
         </h3>
-        <p 
-          className="text-sm text-black/80 line-clamp-2"
-          style={{ fontFamily: "'Open Sans', 'sans-serif'" }}
-        >
+        <p className="text-sm text-black/80 line-clamp-2 font-body">
           {course.description}
         </p>
         <div className="flex items-center justify-between">
-          <span 
-            className="text-base text-black font-medium"
-            style={{ fontFamily: "'Open Sans', 'sans-serif'" }}
-          >
+          <span className="text-base text-black font-medium font-body">
             {course.price}
           </span>
           <div className="flex items-center space-x-1">
             <FaStar className="text-yellow-500 text-sm" />
-            <span 
-              className="text-sm text-gray-600"
-              style={{ fontFamily: "'Open Sans', 'sans-serif'" }}
-            >
+            <span className="text-sm text-muted-foreground font-body">
               {course.rating} ({course.reviews} reviews)
             </span>
           </div>
@@ -53,8 +41,7 @@ export function CourseCard({ course }: CourseCardProps) {
       <CardFooter className="flex justify-end">
         <Button 
           variant="outline" 
-          className="w-full border-[#FE3448] text-[#FE3448] hover:bg-[#E12D3F] hover:text-white hover:border-[#E12D3F] transition-colors duration-200 flex items-center justify-center space-x-2"
-          style={{ fontFamily: "'Open Sans', 'sans-serif'" }}
+          className="w-full border-red text-red hover:bg-red hover:text-white hover:border-red transition-colors duration-200 flex items-center justify-center space-x-2 font-body"
         >
           <span>{course.isMine ? 'Manage Course' : 'Learn More'}</span>
           <FaArrowRight className="text-sm" />

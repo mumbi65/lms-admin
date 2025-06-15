@@ -8,18 +8,22 @@ import { NewCourseDialog } from '@/shared/form';
 import Footer from './footer';
 import { AnimatePresence, motion } from 'framer-motion';
 
-const myCourses  = Courses.filter(c => c.isMine);
-const allCourses = Courses;
 
 export default function ManageCourses() {
   const [tab, setTab] = useState<'my' | 'all'>('my');
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const myFilteredCourses = Courses.filter(
+    c => c.isMine && c.title.toLowerCase().includes(searchTerm.toLowerCase())
+  )
+  const allFilteredCourses = Courses.filter(
+    c => c.title.toLowerCase().includes(searchTerm.toLowerCase())
+  )
+
 
   return (
-    <Layout>
-      <h1
-        className="text-3xl font-bold text-gray-900 mb-3"
-        style={{ fontFamily: "'Inter', 'sans-serif'" }}
-      >
+    <Layout onSearch={term => setSearchTerm(term)}>
+      <h1 className="text-3xl font-bold text-black mb-3 font-heading">
         Manage Courses
       </h1>
 
@@ -28,28 +32,27 @@ export default function ManageCourses() {
         onValueChange={(value: string) => setTab(value as 'my' | 'all')}
         className="space-y-4"
       >
-        {/* Header */}
+        
         <div className="flex items-center justify-between">
-          <TabsList className="bg-gray-100 p-1 rounded-lg flex gap-2 sm:gap-4">
+          <TabsList className="bg-cream p-1 rounded-lg flex gap-2 sm:gap-4">
             {['my','all'].map((value) => (
               <TabsTrigger
                 key={value}
                 value={value}
                 className={`
                   px-4 py-1 sm:px-6 sm:py-2 rounded-md
-                  transition-all duration-300 ease-in-out font-medium
-                  data-[state=active]:bg-[#FE3448]
+                  transition-all duration-300 ease-in-out font-medium font-body
+                  data-[state=active]:bg-red
                   data-[state=active]:text-white
                   data-[state=active]:shadow-sm
                   data-[state=active]:border-transparent
-                  hover:border-[#FE3448]
+                  hover:border-red
                   hover:border-2
-                  hover:text-[#FE3448]
+                  hover:text-red
                   hover:bg-transparent
-                  text-gray-600
+                  text-black
                   border-2 border-transparent
                 `}
-                style={{ fontFamily: "'Open Sans', 'sans-serif'" }}
               >
                 {value === 'my' ? 'My Courses' : 'All Courses'}
               </TabsTrigger>
@@ -61,7 +64,7 @@ export default function ManageCourses() {
           </div>
         </div>
 
-        {/* Animated panels */}
+       
         <AnimatePresence mode="wait">
           {tab === 'my' && (
             <motion.div
@@ -71,7 +74,7 @@ export default function ManageCourses() {
               exit={{ opacity: 0, y: -10, transition: { duration: 0.5 } }}
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
             >
-              {myCourses.map((course) => (
+              {myFilteredCourses.map((course) => (
                 <CourseCard key={course.id} course={course} />
               ))}
             </motion.div>
@@ -85,7 +88,7 @@ export default function ManageCourses() {
               exit={{ opacity: 0, y: -10, transition: { duration: 0.5 } }}
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
             >
-              {allCourses.map((course) => (
+              {allFilteredCourses.map((course) => (
                 <CourseCard key={course.id} course={course} />
               ))}
             </motion.div>

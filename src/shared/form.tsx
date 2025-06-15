@@ -11,6 +11,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import {Select,SelectContent,SelectItem,SelectTrigger,SelectValue,} from '@/components/ui/select';
 import { Plus } from 'lucide-react';
+import { toast } from 'sonner'; 
 
 const courseFormSchema = z.object({
   title: z.string().min(1),
@@ -43,24 +44,28 @@ export function NewCourseDialog() {
     },
   });
 
-  const onSubmit = (values: CourseFormValues) => {
-    console.log('New Course:', values);
-    setOpen(false);
-    form.reset();
+  const onSubmit = async (values: CourseFormValues) => {
+    try {
+      // await api.createCourse(values);
+      console.log('New Course:', values);
+      toast.success(`Created "${values.title}" successfully!`);
+      setOpen(false);
+      form.reset();
+    } catch (err) {
+      toast.error('Failed to create course. Please try again.');
+    }
   };
-
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button 
           className="
-            bg-[#FE3448] hover:bg-[#E02F3F] active:bg-[#D02A3A] 
+            bg-red hover:bg-red/90 active:bg-red/80 
             text-white font-medium px-6 py-2 rounded-lg
             transition-all duration-200 shadow-sm hover:shadow-md
-            border-2 border-transparent hover:border-[#FE3448]
-            flex items-center gap-2
+            border-2 border-transparent hover:border-red
+            flex items-center gap-2 font-body
           "
-          style={{ fontFamily: 'Open Sans, sans-serif' }}
         >
           New Course
           <Plus className="w-4 h-4" />
@@ -89,10 +94,10 @@ export function NewCourseDialog() {
         `}</style>
 
         <DialogHeader>
-          <DialogTitle className="text-2xl font-semibold text-gray-900" style={{ fontFamily: 'Inter, sans-serif' }}>
+          <DialogTitle className="text-2xl font-semibold text-black font-heading">
             Create New Course
           </DialogTitle>
-          <DialogDescription className="text-gray-600" style={{ fontFamily: 'Inter, sans-serif' }}>
+          <DialogDescription className="text-muted-foreground font-heading">
             Fill in the details to create a new course for your students
           </DialogDescription>
         </DialogHeader>
@@ -105,15 +110,14 @@ export function NewCourseDialog() {
               name="title"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-sm font-medium text-gray-900" style={{ fontFamily: 'Inter, sans-serif' }}>
+                  <FormLabel className="text-sm font-medium text-black font-heading">
                     Course Title*
                   </FormLabel>
                   <FormControl>
                     <Input 
                       {...field} 
                       placeholder="Python Programming" 
-                      className="focus-red mt-1 h-11"
-                      style={{ fontFamily: 'Open Sans, sans-serif' }}
+                      className="focus-red mt-1 h-11 font-body"
                     />
                   </FormControl>
                   <FormMessage />
@@ -127,15 +131,14 @@ export function NewCourseDialog() {
                 name="slug"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-sm font-medium text-gray-900" style={{ fontFamily: 'Inter, sans-serif' }}>
+                    <FormLabel className="text-sm font-medium text-black font-heading">
                       Course Slug*
                     </FormLabel>
                     <FormControl>
                       <Input 
                         {...field} 
                         placeholder="PYTHON" 
-                        className="focus-red mt-1 h-11"
-                        style={{ fontFamily: 'Open Sans, sans-serif' }}
+                        className="focus-red mt-1 h-11 font-body"
                       />
                     </FormControl>
                     <FormMessage />
@@ -147,15 +150,14 @@ export function NewCourseDialog() {
                 name="price"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-sm font-medium text-gray-900" style={{ fontFamily: 'Inter, sans-serif' }}>
+                    <FormLabel className="text-sm font-medium text-black font-heading">
                       Price*
                     </FormLabel>
                     <FormControl>
                       <Input 
                         {...field} 
                         placeholder="KES 30,000" 
-                        className="focus-red mt-1 h-11"
-                        style={{ fontFamily: 'Open Sans, sans-serif' }}
+                        className="focus-red mt-1 h-11 font-body"
                       />
                     </FormControl>
                     <FormMessage />
@@ -169,7 +171,7 @@ export function NewCourseDialog() {
               name="summary"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-sm font-medium text-gray-900" style={{ fontFamily: 'Inter, sans-serif' }}>
+                  <FormLabel className="text-sm font-medium text-black font-heading">
                     Course Summary*
                   </FormLabel>
                   <FormControl>
@@ -177,8 +179,7 @@ export function NewCourseDialog() {
                       {...field} 
                       placeholder="Brief summary for course overview" 
                       rows={2} 
-                      className="focus-red mt-1 resize-none"
-                      style={{ fontFamily: 'Open Sans, sans-serif' }}
+                      className="focus-red mt-1 resize-none font-body"
                     />
                   </FormControl>
                   <FormMessage />
@@ -191,7 +192,7 @@ export function NewCourseDialog() {
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-sm font-medium text-gray-900" style={{ fontFamily: 'Inter, sans-serif' }}>
+                  <FormLabel className="text-sm font-medium text-black font-heading">
                     Course Description*
                   </FormLabel>
                   <FormControl>
@@ -199,8 +200,7 @@ export function NewCourseDialog() {
                       {...field} 
                       placeholder="Provide a detailed description of what students will learn" 
                       rows={4} 
-                      className="focus-red mt-1 resize-none"
-                      style={{ fontFamily: 'Open Sans, sans-serif' }}
+                      className="focus-red mt-1 resize-none font-body"
                     />
                   </FormControl>
                   <FormMessage />
@@ -213,7 +213,7 @@ export function NewCourseDialog() {
               name="pathways"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-sm font-medium text-gray-900" style={{ fontFamily: 'Inter, sans-serif' }}>
+                  <FormLabel className="text-sm font-medium text-black font-heading">
                     Associated Pathways*
                   </FormLabel>
                   <FormControl>
@@ -225,7 +225,7 @@ export function NewCourseDialog() {
                       }} 
                       value=""
                     >
-                      <SelectTrigger className="select-trigger mt-1 h-11 w-full" data-focus-red style={{ fontFamily: 'Open Sans, sans-serif' }}>
+                      <SelectTrigger className="select-trigger mt-1 h-11 w-full font-body" data-focus-red>
                         <SelectValue placeholder="Select all that apply" />
                       </SelectTrigger>
                       <SelectContent>
@@ -241,15 +241,15 @@ export function NewCourseDialog() {
                       {field.value.map((pathway) => (
                         <div
                           key={pathway}
-                          className="inline-flex items-center gap-1 px-3 py-1 bg-blue-50 text-blue-700 text-sm rounded-md border border-blue-200"
+                          className="inline-flex items-center gap-1 px-3 py-1 bg-blue/10 text-blue text-sm rounded-md border border-blue/20"
                         >
-                          <span style={{ fontFamily: 'Open Sans, sans-serif' }}>{pathway}</span>
+                          <span className="font-body">{pathway}</span>
                           <button
                             type="button"
                             onClick={() => {
                               field.onChange(field.value.filter((p) => p !== pathway));
                             }}
-                            className="ml-1 text-blue-500 hover:text-blue-700"
+                            className="ml-1 text-blue hover:text-blue/70"
                           >
                             ×
                           </button>
@@ -268,12 +268,12 @@ export function NewCourseDialog() {
                 name="category"
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <FormLabel className="text-sm font-medium text-gray-900" style={{ fontFamily: 'Inter, sans-serif' }}>
+                    <FormLabel className="text-sm font-medium text-black font-heading">
                       Course Category*
                     </FormLabel>
                     <FormControl>
                       <Select onValueChange={field.onChange} value={field.value}>
-                        <SelectTrigger className="select-trigger mt-1 h-11  w-full" data-focus-red style={{ fontFamily: 'Open Sans, sans-serif' }}>
+                        <SelectTrigger className="select-trigger mt-1 h-11 w-full font-body" data-focus-red>
                           <SelectValue placeholder="Select Category" />
                         </SelectTrigger>
                         <SelectContent>
@@ -296,12 +296,12 @@ export function NewCourseDialog() {
                 name="difficulty"
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <FormLabel className="text-sm font-medium text-gray-900" style={{ fontFamily: 'Inter, sans-serif' }}>
+                    <FormLabel className="text-sm font-medium text-black font-heading">
                       Difficulty*
                     </FormLabel>
                     <FormControl>
                       <Select onValueChange={field.onChange} value={field.value}>
-                        <SelectTrigger className="select-trigger mt-1 h-11 w-full" data-focus-red style={{ fontFamily: 'Open Sans, sans-serif' }}>
+                        <SelectTrigger className="select-trigger mt-1 h-11 w-full font-body" data-focus-red>
                           <SelectValue placeholder="Select Difficulty" />
                         </SelectTrigger>
                         <SelectContent>
@@ -322,12 +322,12 @@ export function NewCourseDialog() {
               name="status"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-sm font-medium text-gray-900" style={{ fontFamily: 'Inter, sans-serif' }}>
+                  <FormLabel className="text-sm font-medium text-black font-heading">
                     Course Status*
                   </FormLabel>
                   <FormControl>
                     <Select onValueChange={field.onChange} value={field.value}>
-                      <SelectTrigger className="select-trigger mt-1 h-11 w-full" data-focus-red style={{ fontFamily: 'Open Sans, sans-serif' }}>
+                      <SelectTrigger className="select-trigger mt-1 h-11 w-full font-body" data-focus-red>
                         <SelectValue placeholder="Select Status" />
                       </SelectTrigger>
                       <SelectContent>
@@ -346,10 +346,9 @@ export function NewCourseDialog() {
                 <Button 
                   variant="outline" 
                   className="
-                    border-[#0091AD] text-gray-700 hover:bg-[#0091AD] hover:text-white
-                    px-20 py-3 h-11
+                    border-blue text-muted-foreground hover:bg-blue hover:text-white
+                    px-20 py-3 h-11 font-heading
                   "
-                  style={{ fontFamily: 'Inter, sans-serif' }}
                 >
                   Cancel
                 </Button>
@@ -357,12 +356,11 @@ export function NewCourseDialog() {
               <Button 
                 type="submit"
                 className="
-                  bg-[#FE3448] hover:bg-[#E02F3F] active:bg-[#D02A3A]
+                  bg-red hover:bg-red/90 active:bg-red/80
                   text-white font-medium
                   transition-all duration-200
-                  px-15 py-3 h-11
+                  px-15 py-3 h-11 font-heading
                 "
-                style={{ fontFamily: 'Inter, sans-serif' }}
               >
                 Create Course
               </Button>

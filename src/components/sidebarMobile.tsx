@@ -1,9 +1,5 @@
 "use client";
-import {
-  Sheet,
-  SheetTrigger,
-  SheetContent,
-} from "@/components/ui/sheet";
+import {Sheet,SheetTrigger,SheetContent,} from "@/components/ui/sheet";
 import { FaBars } from "react-icons/fa";
 import {FaTachometerAlt,FaChalkboardTeacher,FaUsers,FaProjectDiagram,FaBookOpen,} from 'react-icons/fa'
 import { Link, useLocation } from 'react-router-dom'
@@ -27,7 +23,7 @@ export function SidebarMobile() {
     <Sheet>
       <SheetTrigger asChild>
         <button
-          className="md:hidden p-2"
+          className="md:hidden p-2 text-black hover:text-red transition-colors"
           aria-label="Open menu"
         >
           <FaBars size={24} />
@@ -37,12 +33,12 @@ export function SidebarMobile() {
          
 
          {/* Logo & Title */}
-        <div className="pt-6 border-b flex flex-col items-center">
+        <div className="pt-6 pb-4 border-b border-border-gray flex flex-col items-center">
           <img src={zinduaLogo} alt="Zindua Logo" className="h-16 w-auto" />
           <p className="mt-2 font-heading text-base text-black">LMS Admin Dash</p>
         </div>
 
-        <nav className=" p-4">
+        <nav className="p-4">
         <ul className="space-y-2">
           {menuItems.map(({ name, path, icon: Icon }) => {
             const isActive = pathname === path
@@ -51,21 +47,20 @@ export function SidebarMobile() {
               <Link
                 to={path}
                 className={`
-                  flex items-center gap-3 px-4 py-2 rounded-md transition-colors
+                  flex items-center gap-3 px-4 py-2 rounded-md transition-colors font-body
                   ${ isActive
-                    ? 'bg-[#FE3448] text-white'
-                    : 'text-black hover:text-[#FE3448]'}
+                    ? 'bg-red text-white'
+                    : 'text-black hover:text-red hover:bg-red/10'}
                 `}
-                style={{ fontFamily: 'Open Sans'}}
               >
                 <Icon
-                  className={`"w-5 h-5" 
+                  className={`w-5 h-5 transition-colors
                     ${isActive
-                      ? 'text-[#FE3448]'
-                      : 'text-black group-hover:text-[#FE3448]'}
+                      ? 'text-white'
+                      : 'text-black'}
                   `}               
                 />
-                <span> {name}</span>
+                <span>{name}</span>
               </Link>
             </li>
           )

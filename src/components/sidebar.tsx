@@ -22,7 +22,7 @@ export function Sidebar({ isExpanded }: SidebarProps) {
 
   return (
     <aside className={`
-      hidden md:flex flex-col bg-white shadow-sm border-r border-[#D3D3D3] flex flex-col
+      hidden md:flex flex-col bg-white shadow-sm border-r border-border-gray flex flex-col
       transition-all duration-300 ease-in-out
       ${isExpanded ? 'w-64' : 'w-16'}
     `}>
@@ -42,7 +42,7 @@ export function Sidebar({ isExpanded }: SidebarProps) {
         px-2 mb-4 transition-all duration-300
         ${isExpanded ? 'opacity-100 max-h-10' : 'opacity-0 max-h-0 overflow-hidden'}
       `}>  
-        <p className="font-heading text-m text-black text-center">LMS Admin Dash</p>
+        <p className="font-heading text-base text-black text-center">LMS Admin Dash</p>
       </div>
 
       {/* Navigation */}
@@ -55,12 +55,11 @@ export function Sidebar({ isExpanded }: SidebarProps) {
               <Link
                 to={path}
                 className={`
-                  group flex items-center gap-3 px-3 py-2 rounded-md transition-all duration-200
+                  group flex items-center gap-3 px-3 py-2 rounded-md transition-all duration-200 font-body
                   ${ isActive
                     ? 'text-red'
-                    : 'text-black hover:text-[#FE3448]'}
+                    : 'text-black hover:text-red'}
                 `}
-                style={{ fontFamily: 'Open Sans'}}
                 onMouseEnter={() => setHoveredItem(name)}
                 onMouseLeave={() => setHoveredItem(null)}
               >
@@ -68,7 +67,7 @@ export function Sidebar({ isExpanded }: SidebarProps) {
                   className={`w-5 h-5 flex-shrink-0 transition
                     ${isActive
                       ? 'text-red'
-                      : 'text-black group-hover:text-[#FE3448]'}
+                      : 'text-black group-hover:text-red'}
                   `}               
                 />
                 <span className={`
@@ -83,13 +82,13 @@ export function Sidebar({ isExpanded }: SidebarProps) {
               {!isExpanded && hoveredItem === name && (
                 <div className="
                   absolute left-full top-0 ml-2 px-3 py-2 
-                  bg-[#FE3448] text-white text-sm rounded-md
+                  bg-red text-white text-sm rounded-md
                   whitespace-nowrap z-50 shadow-lg
                   animate-fade-in
                 ">
                   {name}
                   <div className="absolute left-0 top-1/2 -translate-x-1 -translate-y-1/2 
-                                  border-4 border-transparent border-r-[#FE3448]"></div>
+                                  border-4 border-transparent border-r-red"></div>
                 </div>
               )}
             </li>
@@ -97,7 +96,6 @@ export function Sidebar({ isExpanded }: SidebarProps) {
           })}
         </ul>
       </nav>
-
     </aside>
   )
 }
